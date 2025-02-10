@@ -1,10 +1,16 @@
 import 'Bookings/Booking.dart';
+import 'Bookings/EconomyCarBooking.dart';
+import 'Bookings/ElectricCarBooking.dart';
+import 'Bookings/SportsCarBooking.dart';
 import 'Cars/Car.dart';
 import 'Cars/ElectricCar.dart';
 import 'Cars/SportsCar.dart';
 import 'Customers/Customer.dart';
+
 import 'Invoices/Invoice.dart';
 import 'dart:io';
+
+// lesa me7tag atb2 4wyt solid tany hena brdo
 
 class CarRentalSystem {
   List<Customer> customers = [];
@@ -14,7 +20,6 @@ class CarRentalSystem {
   bool _isAdmin = false;
   CarRentalSystem(this._isAdmin);
 
-  // Set Admin Access
   void setAdminAccess(bool access) {
     _isAdmin = access;
   }
@@ -48,11 +53,6 @@ class CarRentalSystem {
       sink.writeln("Type: $type");
       sink.writeln("Rent Per Day: ${car.rentPriceAday}");
 
-      if (type == "ElectricCar") {
-        sink.writeln("Charging Fees: \$${(car as ElectricCar).chargingFees}");
-      } else if (type == "SportsCar") {
-        sink.writeln("luxury Fees: \$${(car as SportsCar).luxuryFees}");
-      }
       sink.writeln(
           "Late Return fees per day: ${invoice.booking.lateReturnFees}");
 
@@ -60,6 +60,12 @@ class CarRentalSystem {
       sink.writeln("End Date: ${invoice.booking.endDate}");
       sink.writeln("Return Date: ${invoice.returnDate}");
       sink.writeln("Base Cost: \$${invoice.baseCost}");
+      if (type == "ElectricCar") {
+        sink.writeln(
+            "Charging Fees: \$${(invoice.booking as ElectricCarBooking).chargeCar ? (car as ElectricCar).chargingFees : 0}}");
+      } else if (type == "SportsCar") {
+        sink.writeln("luxury Fees: \$${(car as SportsCar).luxuryFees}");
+      }
       sink.writeln("Additional Fees(Late days): \$${invoice.additionalFees}");
       sink.writeln("Total Amount: \$${invoice.totalAmount}");
       sink.writeln("-----------------------------------");
@@ -80,18 +86,17 @@ class CarRentalSystem {
       String type = booking.car.runtimeType.toString();
       sink.writeln("Type: $type");
       sink.writeln("Rent Per Day: ${car.rentPriceAday}");
+      sink.writeln("Late Return fees per day: ${booking.lateReturnFees}");
 
       if (type == "ElectricCar") {
-        sink.writeln("Charging Fees: \$${(car as ElectricCar).chargingFees}");
+        sink.writeln(
+            "Charging Fees: \$${(booking as ElectricCarBooking).chargeCar ? (car as ElectricCar).chargingFees : 0}");
       } else if (type == "SportsCar") {
         sink.writeln("luxury Fees: \$${(car as SportsCar).luxuryFees}");
       }
-      sink.writeln("Late Return fees per day: ${booking.lateReturnFees}");
 
       sink.writeln("Start Date: ${booking.startDate}");
       sink.writeln("End Date: ${booking.endDate}");
-      sink.writeln(
-          "Late Return Fees per day(applied for each day the car is late): \$${booking.lateReturnFees}");
       sink.writeln("Total Cost if returned on time: \$${booking.totalCost}");
 
       sink.writeln("-----------------------------------");
@@ -107,13 +112,19 @@ class CarRentalSystem {
     cars.add(car);
   }
 
-  Booking? createBooking(Customer customer, Car car, DateTime startDate,
-      DateTime endDate, double lateReturnFees) {
-    if (!cars.contains(car)) {
+  Booking? createEconomyCarBooking({
+    required Customer customer,
+    required Car car,
+    required DateTime startDate,
+    required DateTime endDate,
+    required double lateReturnFees,
+  }) {
+    if (!car.available) {
       print("Car not available.");
       return null;
     }
-    Booking booking = Booking(
+
+    Booking booking = EconomyCarBooking(
       customer: customer,
       car: car,
       startDate: startDate,
@@ -123,27 +134,76 @@ class CarRentalSystem {
     booking.calculateTotalCost();
     bookings.add(booking);
     customer.addBooking(booking);
+    car.available = false;
+
     return booking;
   }
 
-  void returnCar(Booking booking, DateTime returnDate) {
+  Booking? createElectricBooking({
+    required Customer customer,
+    required Car car,
+    required DateTime startDate,
+    required DateTime endDate,
+    required double lateReturnFees,
+    required bool chargeCar,
+  }) {
+    if (!car.available) {
+      print("Car not available.");
+      return null;
+    }
+
+    Booking booking = ElectricCarBooking(
+        customer: customer,
+        car: car,
+        startDate: startDate,
+        endDate: endDate,
+        lateReturnFees: lateReturnFees, // Initial late fee is 0
+        chargeCar: chargeCar);
     booking.calculateTotalCost();
-    generateInvoice(booking, returnDate);
+    bookings.add(booking);
+    customer.addBooking(booking);
+    car.available = false;
+    return booking;
   }
 
-  void generateInvoice(Booking booking, DateTime returnDate) {
-    Invoice invoice = Invoice(
-      booking: booking,
-      returnDate: returnDate,
+  Booking? createSportsCarBooking({
+    required Customer customer,
+    required Car car,
+    required DateTime startDate,
+    required DateTime endDate,
+    required double lateReturnFees,
+  }) {
+    if (!car.available) {
+      print("Car not available.");
+      return null;
+    }
+
+    Booking booking = SportsCarBooking(
+      customer: customer,
+      car: car,
+      startDate: startDate,
+      endDate: endDate,
+      lateReturnFees: lateReturnFees, // Initial late fee is 0
     );
-    invoice.generateInvoice();
-    invoices.add(invoice);
+    booking.calculateTotalCost();
+    bookings.add(booking);
+    customer.addBooking(booking);
+    car.available = false;
+
+    return booking;
+  }
+
+  void returnCar({required Booking booking, required DateTime returnDate}) {
+    Invoice inv = booking.createInvoice(returnDate);
+    inv.generateInvoice();
+    invoices.add(inv);
+    booking.car.available = true;
   }
 
   void displayAllInvoices() {
     print("\nAll Invoices:");
     for (var invoice in invoices) {
-      invoice.displayInvoice();
+      invoice.generateInvoice();
     }
   }
 

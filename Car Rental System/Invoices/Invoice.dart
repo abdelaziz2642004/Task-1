@@ -1,56 +1,55 @@
 import 'package:uuid/uuid.dart';
 import '../Bookings/Booking.dart';
 import '../Cars/Car.dart';
-import '../Cars/ElectricCar.dart';
-import '../Cars/SportsCar.dart';
 
-class Invoice {
-  String id;
-  Booking booking;
-  double baseCost = 0.0;
-  double additionalFees = 0.0;
-  double totalAmount = 0.0;
-  DateTime returnDate = DateTime.now();
+abstract class Invoice {
+  String _id;
+  Booking _booking;
+  double _baseCost = 0.0; // without luxury or charging fees
+  double _additionalFees = 0.0;
+  double _totalAmount = 0.0;
+  DateTime _returnDate = DateTime.now();
 
   Invoice({
-    required this.booking,
-    required this.returnDate,
-  })  : id = Uuid().v4(),
-        baseCost = booking.totalCost;
+    required Booking booking,
+    required DateTime returnDate,
+  })  : _id = Uuid().v4(),
+        _booking = booking,
+        _returnDate = returnDate,
+        _baseCost =
+            booking.car.rentPriceAday * booking.duration.inDays.toDouble();
 
-  void generateInvoice() {
-    if (returnDate.isAfter(booking.endDate)) {
-      additionalFees = booking.lateReturnFees *
-          returnDate.difference(booking.endDate).inDays.toDouble();
+  void calcAdditionalFees() {
+    if (_returnDate.isAfter(_booking.endDate)) {
+      _additionalFees = _booking.lateReturnFees *
+          _returnDate.difference(_booking.endDate).inDays.toDouble();
     }
-    totalAmount = baseCost + additionalFees;
-
-    displayInvoice();
+    _totalAmount = _baseCost + _additionalFees;
   }
 
-  void displayInvoice() {
-    Car car = booking.car;
-    print("Invoice ID: $id");
-    print("Booking ID: ${booking.id}");
-    print("Customer: ${booking.customer.name}");
-    print("Car ID: ${booking.car.id}, Type: ${booking.car.runtimeType}");
+  void generateInvoice() {
+    Car car = _booking.car;
+    print("Invoice ID: $_id");
+    print("Booking ID: ${_booking.id}");
+    print("Customer: ${_booking.customer.name}");
+    print("Car ID: ${_booking.car.id}");
     String type = car.runtimeType.toString();
     print("type: $type");
 
     print("rent per day: ${car.rentPriceAday}");
-    print("Reservation Period: ${booking.startDate} to ${booking.endDate}");
-    print("Return Date: $returnDate");
+    print("Late fees per day: ${_booking.lateReturnFees}");
 
-    if (type == "ElectricCar") {
-      print("Charging Fees: \$${(car as ElectricCar).chargingFees}");
-    } else if (type == "SportsCar") {
-      print("luxury Fees: \$${(car as SportsCar).luxuryFees}");
-    }
-    print("Base Rental Cost: \$${baseCost.toStringAsFixed(2)}");
+    print("Reservation Period: ${_booking.startDate} to ${_booking.endDate}");
+    print("Return Date: $_returnDate");
 
-    print(
-        "Additional Fees for late return : \$${additionalFees.toStringAsFixed(2)}");
-    print("Total Amount: \$${totalAmount.toStringAsFixed(2)}");
-    print("-----------------------------------");
+    // Getters
   }
+
+  String get id => _id;
+  Booking get booking => _booking;
+  double get baseCost => _baseCost;
+  double get additionalFees => _additionalFees;
+  double get totalAmount => _totalAmount;
+  DateTime get returnDate => _returnDate;
+  set totalAmount(double value) => _totalAmount = value;
 }

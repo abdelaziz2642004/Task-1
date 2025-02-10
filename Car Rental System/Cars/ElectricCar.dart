@@ -1,27 +1,28 @@
 import 'Car.dart';
 
 class ElectricCar extends Car {
-  int chargeCapacity;
-  int chargingFees;
-  bool charged;
+  double _chargeCapacity;
+  double _chargingFees;
 
   ElectricCar({
     required int year,
     required double rentPriceAday,
     required bool available,
-    required this.chargeCapacity,
-    this.chargingFees = 0,
-    this.charged = false,
-  }) : super(year, rentPriceAday, available);
+    required double chargeCapacity,
+    double chargingFees = 0,
+  })  : _chargeCapacity = chargeCapacity,
+        _chargingFees = chargingFees,
+        super(year, rentPriceAday, available);
 
   @override
   void displayCarDetails() {
     super.displayCarDetails();
-    print("Battery Life: $chargeCapacity");
+    print("Battery Life: $_chargeCapacity");
   }
 
   @override
-  double calcCost(double days) {
-    return super.calcCost(days) + chargingFees;
-  }
+  double calcCost(double days) => super.calcCost(days) + _chargingFees;
+
+  double get chargeCapacity => _chargeCapacity;
+  double get chargingFees => _chargingFees;
 }

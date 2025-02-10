@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
-// made the variables private and added getters 
 
 abstract class Car {
+  // single responsibility  --> calcCost ( display 3adya mlha4 lazma just a print)
   String _id;
   int _year; // model ?
   double _rentPriceAday;
@@ -24,12 +24,11 @@ abstract class Car {
     print("Available: $_available");
   }
 
-  double calcCost(double days) {
-    return days * _rentPriceAday;
-  }
+  double calcCost(double days) => days * _rentPriceAday;
 
   String get id => _id;
   int get year => _year;
   double get rentPriceAday => _rentPriceAday;
   bool get available => _available;
+  set available(bool available) => _available = available;
 }

@@ -1,90 +1,17 @@
 All Invoices:
 
-Invoice ID: d25dbc87-08e8-4211-98ee-59a251a45ac5
-Booking ID: 487b0a56-cac6-4119-b91b-fa0e16cd3b14
-Customer: Ahmed
-Car ID: 9e4361bf-8ca9-4d73-b75c-0e3c1022be31
-Type: EconomyCar
-Rent Per Day: 50.7
-Late Return fees per day: 50.7
-Start Date: 2024-02-01 00:00:00.000
-End Date: 2024-02-03 00:00:00.000
-Return Date: 2024-02-05 00:00:00.000
-Base Cost: $101.4
-Additional Fees(Late days): $101.4
-Total Amount: $202.8
------------------------------------
-Invoice ID: 8b608773-a32a-417b-9a6a-48b2a3215874
-Booking ID: 659aed44-bf80-49ae-94aa-5932d43f84b8
-Customer: Sara
-Car ID: e149ca99-f1db-4feb-949c-4264df206250
-Type: ElectricCar
-Rent Per Day: 100.5
-Charging Fees: $20
-Late Return fees per day: 100.5
-Start Date: 2024-03-05 00:00:00.000
-End Date: 2024-03-10 00:00:00.000
-Return Date: 2024-03-12 00:00:00.000
-Base Cost: $522.5
-Additional Fees(Late days): $201.0
-Total Amount: $723.5
------------------------------------
-Invoice ID: 372e2757-a793-4359-8baa-968251705796
-Booking ID: a04d5c54-fc5e-4d4a-a9ba-6ce0970ef9a1
-Customer: Omar
-Car ID: 9fea7784-4207-4eb2-acea-4a30e52ce3f8
-Type: SportsCar
-Rent Per Day: 200.0
-luxury Fees: $50.0
-Late Return fees per day: 200.0
-Start Date: 2024-04-12 00:00:00.000
-End Date: 2024-04-15 00:00:00.000
-Return Date: 2024-04-18 00:00:00.000
-Base Cost: $650.0
-Additional Fees(Late days): $600.0
-Total Amount: $1250.0
------------------------------------
-Invoice ID: 8148d9da-c754-458f-b30d-7f346e486fdb
-Booking ID: 4ec2cfea-d206-44ca-a9ef-c00e6588de8e
-Customer: Hassan
-Car ID: 0f197eb0-ca75-4862-9dd3-5bd4306ff727
-Type: EconomyCar
-Rent Per Day: 45.0
-Late Return fees per day: 45.0
-Start Date: 2024-05-07 00:00:00.000
-End Date: 2024-05-09 00:00:00.000
-Return Date: 2024-05-10 00:00:00.000
-Base Cost: $90.0
-Additional Fees(Late days): $45.0
-Total Amount: $135.0
------------------------------------
-Invoice ID: 0d19b16c-b009-4059-8620-8ba2e6c0d1dc
-Booking ID: ea787b4a-6497-4761-8321-33ad22d4bc54
-Customer: Lina
-Car ID: c20c70f5-1502-453f-89ba-9c70b20a28ae
-Type: ElectricCar
-Rent Per Day: 90.0
-Charging Fees: $15
-Late Return fees per day: 90.0
-Start Date: 2024-06-14 00:00:00.000
-End Date: 2024-06-18 00:00:00.000
-Return Date: 2024-06-20 00:00:00.000
-Base Cost: $375.0
-Additional Fees(Late days): $180.0
-Total Amount: $555.0
------------------------------------
-Invoice ID: 0c116a06-536e-494c-9186-32c6c3a322e2
-Booking ID: 31bf02d2-1f98-4e46-a9d7-0c083f48e251
+Invoice ID: 1bfb123d-97ab-439e-9f8f-b33ee7078322
+Booking ID: 12a84a77-200d-43c7-8412-819b2f79bb86
 Customer: Mina
-Car ID: be77a6bc-3ea6-4068-81f8-534089f26d17
+Car ID: 5887eacf-f34a-4fdc-a829-e831557dda8a
 Type: SportsCar
 Rent Per Day: 180.0
-luxury Fees: $40.0
 Late Return fees per day: 180.0
 Start Date: 2024-07-20 00:00:00.000
 End Date: 2024-07-25 00:00:00.000
 Return Date: 2024-07-27 00:00:00.000
-Base Cost: $940.0
+Base Cost: $900.0
+luxury Fees: $40.0
 Additional Fees(Late days): $360.0
 Total Amount: $1300.0
 -----------------------------------

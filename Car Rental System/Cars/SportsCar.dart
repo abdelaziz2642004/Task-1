@@ -1,23 +1,23 @@
 import 'Car.dart';
 
 class SportsCar extends Car {
-  double luxuryFees;
+  double _luxuryFees;
 
   SportsCar({
     required int year,
     required double rentPriceAday,
     required bool available,
-    this.luxuryFees = 0,
-  }) : super(year, rentPriceAday, available);
+    required double luxuryFees,
+  })  : _luxuryFees = luxuryFees,
+        super(year, rentPriceAday, available);
 
   @override
   void displayCarDetails() {
     super.displayCarDetails();
-    print("Luxury Fees: $luxuryFees");
+    print("Luxury Fees: $_luxuryFees");
   }
 
   @override
-  double calcCost(double days) {
-    return super.calcCost(days) + luxuryFees;
-  }
+  double calcCost(double days) => super.calcCost(days) + _luxuryFees;
+  double get luxuryFees => _luxuryFees;
 }
