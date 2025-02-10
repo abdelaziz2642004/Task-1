@@ -2,6 +2,14 @@ import 'package:uuid/uuid.dart';
 import '../Bookings/Booking.dart';
 import '../Cars/Car.dart';
 
+// leeh 3mlt invoice abstract class w 3mlt inherit :
+// 34an 7rfyn satr wa7ed , w hwa el fees ( swa2 kanet el charging aw el luxury fees )
+// le 2n lw kont 3mltha b if's kanet htwl awy elly hwa , if car is electric , apply charging fees , if  msh 3arf eh do msh 3arf eh
+// w brdw el 3mlt one big invoice w 7tyt feh kol el fees w elly msh m7tago gnbo 0$ , mknt4 htb2a latyfa brdw
+// fa 2olt a3ml invoice for each type of car
+// w lma agy a3ml booking 3momn , all I need to do is booking.creatInvoice , I don't have to check for the type of booking or car , it just does it.
+
+
 abstract class Invoice {
   String _id;
   Booking _booking;
