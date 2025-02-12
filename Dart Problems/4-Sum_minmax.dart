@@ -11,5 +11,11 @@ void main() {
     if (minn > element) minn = element;
   });
 
-  print("max: $maxx, min: $minn");
+  // print("max: $maxx, min: $minn");
+  print("Sum: ${minn + maxx}");
+
+  // another way
+  print(
+      "max: ${list.reduce((curr, next) => curr > next ? curr : next)}"); // 8 --> Max
+  print("min: ${list.reduce((curr, next) => curr < next ? curr : next)}");
 }
