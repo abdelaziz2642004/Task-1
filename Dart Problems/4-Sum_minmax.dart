@@ -1,24 +1,15 @@
 import 'dart:io';
 
-
 void main() {
-  int size = int.parse(stdin.readLineSync()!);
-  List<int> numbers = [];
-  int x = int.parse(stdin.readLineSync()!);
-  numbers.add(x);
+  print("Enter the numbers separated by space:");
+  List<int> list = stdin.readLineSync()!.split(' ').map(int.parse).toList();
+  int maxx = list[0];
+  int minn = maxx;
 
-  int maxx =numbers[0];
-  int minn =numbers[0];
-  for (int i=1;i<size;i++) {
-    x = int.parse(stdin.readLineSync()!);
-    if (x > maxx) {
-      maxx = x;
-    }
-    if (x < minn) {
-      minn = x;
-    }
-  }
+  list.forEach((element) {
+    if (maxx < element) maxx = element;
+    if (minn > element) minn = element;
+  });
 
-  int sum = maxx + minn;
-  print(sum);
+  print("max: $maxx, min: $minn");
 }
