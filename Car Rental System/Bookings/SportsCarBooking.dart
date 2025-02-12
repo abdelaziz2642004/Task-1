@@ -25,10 +25,9 @@ class SportsCarBooking extends Booking {
   @override
   void displayBookingDetails() {
     super.displayBookingDetails();
-    print("rent per day: ${car.rentPriceAday}");
+    print("rent per day: \$${(car as SportsCar).luxuryFees}");
     print("luxury Fees: \$${(car as SportsCar).luxuryFees}");
-    print("Total Cost: $totalCost");
-    print("Late Return Fees per day: $lateReturnFees");
+    print("Total Cost(without late penalties): $totalCost");
     print("-----------------------------------");
   }
 

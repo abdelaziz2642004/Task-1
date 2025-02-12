@@ -1,13 +1,20 @@
 import 'package:uuid/uuid.dart';
 
+import '../Bookings/Booking.dart';
+import '../Customers/Customer.dart';
+
 abstract class Car {
   // single responsibility  --> calcCost ( display 3adya mlha4 lazma just a print)
   String _id;
   int _year; // model ?
   double _rentPriceAday;
   bool _available;
-
-  Car(this._year, this._rentPriceAday, this._available) : _id = Uuid().v4();
+  // BookingStrategy bookingStrategy;
+  Car(
+    this._year,
+    this._rentPriceAday,
+    this._available,
+  ) : _id = Uuid().v4();
 
   set setAvailable(bool available) {
     _available = available;
@@ -31,4 +38,13 @@ abstract class Car {
   double get rentPriceAday => _rentPriceAday;
   bool get available => _available;
   set available(bool available) => _available = available;
+
+  // this will solve the open closed principle but fuck up the single responsibility , use a strategy pattern ?
+
+  Booking createBooking({
+    required Customer customer,
+    required DateTime startDate,
+    required DateTime endDate,
+    required double lateReturnFees,
+  });
 }

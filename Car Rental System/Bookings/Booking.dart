@@ -46,9 +46,7 @@ abstract class Booking {
     print("Start Date: $_startDate");
     print("End Date: $_endDate");
     print("Duration: ${_duration.inDays} days");
-    print("Total Cost: $_totalCost");
     print("Late Return Fees per day: $_lateReturnFees");
-    print("-----------------------------------");
   }
 
   Invoice createInvoice(DateTime returnDate);

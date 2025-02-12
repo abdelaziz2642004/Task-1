@@ -7,3 +7,4 @@ environment:
 
 dependencies:
   uuid: ^3.0.4
+  excel: ^2.1.0

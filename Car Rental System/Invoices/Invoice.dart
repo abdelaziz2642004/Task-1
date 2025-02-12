@@ -9,7 +9,6 @@ import '../Cars/Car.dart';
 // fa 2olt a3ml invoice for each type of car
 // w lma agy a3ml booking 3momn , all I need to do is booking.creatInvoice , I don't have to check for the type of booking or car , it just does it.
 
-
 abstract class Invoice {
   String _id;
   Booking _booking;

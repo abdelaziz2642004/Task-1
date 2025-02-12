@@ -33,7 +33,6 @@ class ElectricCarBooking extends Booking {
       print("Charging Fees: \$${(car as ElectricCar).chargingFees}");
     }
     print("Total Cost: $totalCost");
-    print("Late Return Fees per day: $lateReturnFees");
     print("-----------------------------------");
   }
 

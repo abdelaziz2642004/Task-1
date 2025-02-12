@@ -24,7 +24,6 @@ class EconomyCarBooking extends Booking {
     super.displayBookingDetails();
     print("rent per day: ${car.rentPriceAday}");
     print("Total Cost: $totalCost");
-    print("Late Return Fees per day: $lateReturnFees");
     print("-----------------------------------");
   }
 

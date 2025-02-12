@@ -1,66 +1,12 @@
 All Bookings:
 
-Booking ID: 2c620d11-3e99-42cc-a5f1-7d90c5277eb6
+Booking ID: 61b4b52b-cc70-435d-8f56-257655214d1f
 Customer: Ahmed
-Car ID: ad04b571-5a7e-48f8-a8c5-c33b1aefac26
-Type: EconomyCar
-Rent Per Day: 50.7
-Late Return fees per day: 50.7
-Start Date: 2024-02-01 00:00:00.000
-End Date: 2024-02-03 00:00:00.000
-Total Cost if returned on time: $101.4
------------------------------------
-Booking ID: ba9bc7bf-66b6-47e2-af44-8dda6b098ccc
-Customer: Sara
-Car ID: 502dc776-3567-4997-aced-9196cdf2cbdd
+Car ID: f8dde9f7-ed1c-47e6-b6cc-9b37dd7181f0
 Type: ElectricCar
 Rent Per Day: 100.5
-Late Return fees per day: 100.5
 Charging Fees: $20.0
-Start Date: 2024-03-05 00:00:00.000
-End Date: 2024-03-10 00:00:00.000
-Total Cost if returned on time: $522.5
------------------------------------
-Booking ID: a4e2db02-c5cc-43f4-93b3-5b41fc73cd5d
-Customer: Omar
-Car ID: 6c0b2dc9-33a5-4b7e-903c-875159fb2fe3
-Type: SportsCar
-Rent Per Day: 200.0
-Late Return fees per day: 200.0
-luxury Fees: $50.0
-Start Date: 2024-04-12 00:00:00.000
-End Date: 2024-04-15 00:00:00.000
-Total Cost if returned on time: $650.0
------------------------------------
-Booking ID: 6a2a98b8-1806-4f10-91c5-9c1608c144e0
-Customer: Hassan
-Car ID: 40bfc7c6-b618-4494-a2e4-78e38b4c2263
-Type: EconomyCar
-Rent Per Day: 45.0
-Late Return fees per day: 45.0
-Start Date: 2024-05-07 00:00:00.000
-End Date: 2024-05-09 00:00:00.000
-Total Cost if returned on time: $90.0
------------------------------------
-Booking ID: 94c159f6-c341-47b2-ab78-034090a6ebb7
-Customer: Lina
-Car ID: 48a0fdca-c41c-4d2e-b8c4-51ef1b5ea65c
-Type: ElectricCar
-Rent Per Day: 90.0
-Late Return fees per day: 90.0
-Charging Fees: $0
-Start Date: 2024-06-14 00:00:00.000
-End Date: 2024-06-18 00:00:00.000
-Total Cost if returned on time: $360.0
------------------------------------
-Booking ID: e1ecef9a-eccc-4be4-bf3e-98dd01fe19e5
-Customer: Mina
-Car ID: 5cfa8cfe-f910-4662-a5ed-0d5d5c2ee2cf
-Type: SportsCar
-Rent Per Day: 180.0
-Late Return fees per day: 180.0
-luxury Fees: $40.0
-Start Date: 2024-07-20 00:00:00.000
-End Date: 2024-07-25 00:00:00.000
-Total Cost if returned on time: $940.0
+Start Date: 2024-09-09 00:00:00.000
+End Date: 2024-09-10 00:00:00.000
+Total Cost if returned on time: $120.5
 -----------------------------------
