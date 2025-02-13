@@ -2,12 +2,12 @@ import 'dart:io';
 
 import '../Bookings/Booking.dart';
 import '../Bookings/ElectricCarBooking.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import 'Car.dart';
 
 class ElectricCar extends Car {
-  double _chargeCapacity;
-  double _chargingFees;
+  final double _chargeCapacity;
+  final double _chargingFees;
 
   ElectricCar({
     required int year,

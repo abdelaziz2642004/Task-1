@@ -2,7 +2,7 @@
 // this is much better than using the parent class because it will be easier to add more features :DDD
 import '../Cars/Car.dart';
 import '../Cars/SportsCar.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import '../Invoices/Invoice.dart';
 import '../Invoices/SportsCarInvoice.dart';
 import 'Booking.dart';

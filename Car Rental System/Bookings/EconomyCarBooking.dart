@@ -1,5 +1,5 @@
 import '../Cars/Car.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import '../Invoices/EconomyCarInvoice.dart';
 import '../Invoices/Invoice.dart';
 import 'Booking.dart';

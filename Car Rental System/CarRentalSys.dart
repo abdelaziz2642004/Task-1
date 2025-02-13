@@ -1,16 +1,14 @@
-import 'package:excel/excel.dart';
-
-import 'Admins/Admin.dart';
+import 'Admin/Admin.dart';
 import 'Bookings/Booking.dart';
-import 'Bookings/ElectricCarBooking.dart';
-import 'Bookings/SportsCarBooking.dart';
-import 'Cars/Car.dart';
-import 'Cars/ElectricCar.dart';
-import 'Cars/SportsCar.dart';
-import 'Customers/Customer.dart';
 
+import 'Cars/Car.dart';
+
+import 'Customer/Customer.dart';
+
+import 'DummyData/dummy.dart';
 import 'Invoices/Invoice.dart';
-import 'dart:io';
+
+import 'SavingReportsCode/Logic.dart';
 // lesa me7tag atb2 4wyt solid tany hena brdo ( did somethings )
 // problem: I solved the open closed principle , but got a single responsibility issue
 // 1- creating a booking in a car
@@ -20,12 +18,13 @@ import 'dart:io';
 // fa 34an awry el e5tlaf dh tb3to fe txt file
 // w laken brdw 3mlt excel file w 7tyt kolo m3 kolo w el zyada kan feeh 0$ , the reason I created several inherited classes :D
 
-class CarRentalSystem {
-  List<Customer> _customers;
-  List<Car> _cars;
-  List<Booking> _bookings;
-  List<Invoice> _invoices;
-  List<Admin> _admins;
+class CarRentalSystem with dummy, ReportLogic {
+  late final List<Customer> _customers;
+  late final List<Car> _cars;
+  late final List<Admin> _admins;
+
+  final List<Booking> _bookings;
+  final List<Invoice> _invoices;
 
   List<Customer> get customers => _customers;
   List<Car> get cars => _cars;
@@ -33,19 +32,21 @@ class CarRentalSystem {
   List<Invoice> get invoices => _invoices;
   List<Admin> get admins => _admins;
 
+  void start() {
+    _cars = ca;
+    _admins = ad;
+    _customers = cust;
+  }
+
   CarRentalSystem({
-    List<Customer>? customers,
-    List<Car>? cars,
+    List<Customer>? cust,
+    List<Car>? CARS,
     List<Booking>? bookings,
     List<Invoice>? invoices,
     List<Admin>? admins,
     bool isAdmin = false,
-  })  : _customers = customers ?? [],
-        _cars = cars ?? [],
-        _bookings = bookings ?? [],
-        _invoices = invoices ?? [],
-        _admins = admins ?? [];
-
+  })  : _bookings = bookings ?? [],
+        _invoices = invoices ?? [];
   Booking? createBooking({
     required Customer customer,
     required Car car,
@@ -83,201 +84,30 @@ class CarRentalSystem {
   }
 
   void trackReservations() {
-    _saveInvoicesToExcel();
-    _saveBookingsToExcel();
-    _saveInvoicesToFile();
-    _saveBookingsToFile();
+    saveInvoicesToExcel(_invoices);
+    saveBookingsToExcel(_bookings);
+    saveInvoicesToFile(_invoices);
+    saveBookingsToFile(_bookings);
 
     print("Reservation reports generated successfully!");
   }
 
-  void _saveInvoicesToExcel() {
-    var excel = Excel.createExcel();
-    var sheet = excel['Invoices'];
+  bool check(String username, String password) {
+    if (admins.any(
+        (admin) => admin.username == username && admin.password == password))
+      return true;
 
-    // Adding Headers
-    sheet.appendRow([
-      'Invoice ID',
-      'Booking ID',
-      'Customer Name',
-      'Car ID',
-      'Type',
-      'Rent Per Day',
-      'Late Return Fees',
-      'Start Date',
-      'End Date',
-      'Return Date',
-      'Base Cost',
-      'charging Fees',
-      'Luxury Fees',
-      'Additional Fees',
-      'Total Amount'
-    ]);
-
-    for (var invoice in _invoices) {
-      var car = invoice.booking.car;
-      String type = car.runtimeType.toString();
-      var booking = invoice.booking;
-      sheet.appendRow([
-        invoice.id,
-        booking.id,
-        booking.customer.name,
-        car.id,
-        type,
-        car.rentPriceAday,
-        booking.lateReturnFees,
-        booking.startDate.toString(),
-        booking.endDate.toString(),
-        invoice.returnDate.toString(),
-        invoice.baseCost,
-        if (type == "ElectricCar")
-          (booking as ElectricCarBooking).chargeCar
-              ? (car as ElectricCar).chargingFees
-              : 0
-        else
-          0,
-        if (type == "SportsCar") (car as SportsCar).luxuryFees else 0,
-        invoice.additionalFees,
-        invoice.totalAmount
-      ]);
-    }
-
-    File('invoices_report.xlsx')
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(excel.encode()!);
-  }
-
-  void _saveBookingsToExcel() {
-    var excel = Excel.createExcel();
-    var sheet = excel['Bookings'];
-
-    // Adding Headers
-    sheet.appendRow([
-      'Booking ID',
-      'Customer Name',
-      'Car ID',
-      'Type',
-      'Rent Per Day',
-      'Charging Fees',
-      'Luxury Fees',
-      'Start Date',
-      'End Date',
-      'Total Cost'
-    ]);
-
-    for (var booking in _bookings) {
-      var car = booking.car;
-      String type = car.runtimeType.toString();
-      sheet.appendRow([
-        booking.id,
-        booking.customer.name,
-        car.id,
-        type,
-        car.rentPriceAday,
-        if (booking is ElectricCarBooking)
-          booking.chargeCar ? (booking.car as ElectricCar).chargingFees : 0
-        else
-          0,
-        if (booking is SportsCarBooking)
-          (booking.car as SportsCar).luxuryFees
-        else
-          0,
-        booking.startDate.toString(),
-        booking.endDate.toString(),
-        booking.totalCost
-      ]);
-    }
-
-    File('bookings_report.xlsx')
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(excel.encode()!);
+    return false;
   }
 
   GenerateReports(String username, String password) {
     {
-      if (admins.any(
-          (admin) => admin.username == username && admin.password == password))
+      if (check(username, password))
         trackReservations();
       else {
         print("Password and/or username not correct");
       }
     }
-  }
-
-  void _saveInvoicesToFile()  {
-    try {
-      final file = File('invoices_report.txt');
-      print("Saving to file: ${file.absolute.path}");
-
-      StringBuffer buffer = StringBuffer();
-      buffer.writeln("All Invoices:\n");
-
-      for (var invoice in _invoices) {
-        Car car = invoice.booking.car;
-        buffer.writeln("Invoice ID: ${invoice.id}");
-        buffer.writeln("Booking ID: ${invoice.booking.id}");
-        buffer.writeln("Customer: ${invoice.booking.customer.name}");
-        buffer.writeln("Car ID: ${car.id}");
-        buffer.writeln("Type: ${car.runtimeType}");
-        buffer.writeln("Rent Per Day: ${car.rentPriceAday}");
-        buffer.writeln(
-            "Late Return fees per day: ${invoice.booking.lateReturnFees}");
-        buffer.writeln("Start Date: ${invoice.booking.startDate}");
-        buffer.writeln("End Date: ${invoice.booking.endDate}");
-        buffer.writeln("Return Date: ${invoice.returnDate}");
-        buffer.writeln("Base Cost: \$${invoice.baseCost}");
-
-        if (car is ElectricCar && invoice.booking is ElectricCarBooking) {
-          buffer.writeln(
-              "Charging Fees: \$${(invoice.booking as ElectricCarBooking).chargeCar ? car.chargingFees : 0}");
-        } else if (car is SportsCar) {
-          buffer.writeln("Luxury Fees: \$${car.luxuryFees}");
-        }
-
-        buffer.writeln(
-            "Additional Fees (Late days): \$${invoice.additionalFees}");
-        buffer.writeln("Total Amount: \$${invoice.totalAmount}");
-        buffer.writeln("-----------------------------------");
-      }
-
-      file.writeAsStringSync(buffer.toString()); // by5ly el mwdo3 sync , msh b7tag a await aw a3ml exit lel program , la2 , hwa be update 3la tool as we are going , learn it
-
-      print("Invoices saved successfully!");
-    } catch (e) {
-      print("Error saving invoices to file: $e");
-    }
-  }
-
-  void _saveBookingsToFile() {
-    final file = File('bookings_report.txt');
-
-    StringBuffer buffer = StringBuffer();
-    buffer.writeln("All Bookings:\n");
-
-    for (var booking in _bookings) {
-      Car car = booking.car;
-      buffer.writeln("Booking ID: ${booking.id}");
-      buffer.writeln("Customer: ${booking.customer.name}");
-      buffer.writeln("Car ID: ${car.id}");
-      String type = booking.car.runtimeType.toString();
-      buffer.writeln("Type: $type");
-      buffer.writeln("Rent Per Day: ${car.rentPriceAday}");
-
-      if (type == "ElectricCar") {
-        buffer.writeln(
-            "Charging Fees: \$${(booking as ElectricCarBooking).chargeCar ? (car as ElectricCar).chargingFees : 0}");
-      } else if (type == "SportsCar") {
-        buffer.writeln("Luxury Fees: \$${(car as SportsCar).luxuryFees}");
-      }
-
-      buffer.writeln("Start Date: ${booking.startDate}");
-      buffer.writeln("End Date: ${booking.endDate}");
-      buffer.writeln("Total Cost if returned on time: \$${booking.totalCost}");
-      buffer.writeln("-----------------------------------");
-    }
-
-    file.writeAsStringSync(buffer.toString()); // by5ly el mwdo3 sync , msh b7tag a await aw a3ml exit lel program , la2 , hwa be update 3la tool as we are going , learn it
-    print("Bookings saved successfully!");
   }
 
   void RegisterCustomer(Customer customer) {

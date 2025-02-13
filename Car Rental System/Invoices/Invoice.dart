@@ -10,12 +10,13 @@ import '../Cars/Car.dart';
 // w lma agy a3ml booking 3momn , all I need to do is booking.creatInvoice , I don't have to check for the type of booking or car , it just does it.
 
 abstract class Invoice {
-  String _id;
-  Booking _booking;
-  double _baseCost = 0.0; // without luxury or charging fees
+  final String _id;
+  final Booking _booking;
+  final double _baseCost ; // without luxury or charging fees
+  final DateTime _returnDate ;
+
   double _additionalFees = 0.0;
   double _totalAmount = 0.0;
-  DateTime _returnDate = DateTime.now();
 
   Invoice({
     required Booking booking,

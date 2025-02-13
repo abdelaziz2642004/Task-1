@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 import '../Cars/Car.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import '../Invoices/Invoice.dart';
 
 // tyb leeh 3mlt el booking abstract w inheritance brdo ? be kol bsata 34an 7aga wa7da mostfza esmha "Charging fees IF USED"
@@ -11,14 +11,14 @@ import '../Invoices/Invoice.dart';
 // fa decided to make it abstract and inherit from it
 
 abstract class Booking {
-  String _id;
-  Customer _customer;
-  Car _car;
-  DateTime _startDate;
-  DateTime _endDate;
-  Duration _duration;
+  final String _id;
+  final Customer _customer;
+  final Car _car;
+  final DateTime _startDate;
+  final DateTime _endDate;
+  final Duration _duration;
+  final double _lateReturnFees;
   double _totalCost = 0.0;
-  double _lateReturnFees = 0.0;
 
   Booking({
     required Customer customer,

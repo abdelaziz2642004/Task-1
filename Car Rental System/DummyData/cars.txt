@@ -1,0 +1,4 @@
+//Type, Year, RentPrice, Available, [Additional fields] ( DO NOT REMOVE THIS LINE )
+EconomyCar, 2022, 50.7, true
+ElectricCar, 2023, 100.5, true, 400, 20
+SportsCar, 2021, 200.0, true, 50.0

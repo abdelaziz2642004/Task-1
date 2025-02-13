@@ -1,10 +1,10 @@
 import '../Bookings/Booking.dart';
 import '../Bookings/SportsCarBooking.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import 'Car.dart';
 
 class SportsCar extends Car {
-  double _luxuryFees;
+  final double _luxuryFees;
 
   SportsCar({
     required int year,

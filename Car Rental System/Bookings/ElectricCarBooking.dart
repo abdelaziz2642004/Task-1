@@ -3,13 +3,13 @@
 
 import '../Cars/Car.dart';
 import '../Cars/ElectricCar.dart';
-import '../Customers/Customer.dart';
+import '../Customer/Customer.dart';
 import '../Invoices/ElectricCarInvoice.dart';
 import '../Invoices/Invoice.dart';
 import 'Booking.dart';
 
 class ElectricCarBooking extends Booking {
-  bool chargeCar;
+  final bool chargeCar;
 
   ElectricCarBooking({
     required Customer customer,

@@ -1,0 +1,31 @@
+All Invoices:
+
+Invoice ID: 0363a0e4-d255-4a0b-aaa8-6688b5744936
+Booking ID: 5f216a39-899c-48be-b44a-da92a40f552c
+Customer: zezoo
+Car ID: b451b554-050d-442f-a49d-ff57d5d885e9
+Type: EconomyCar
+Rent Per Day: 50.7
+Late Return fees per day: 101.4
+Start Date: 2024-09-09 00:00:00.000
+End Date: 2024-09-10 00:00:00.000
+Return Date: 2024-09-11 00:00:00.000
+Base Cost: $50.7
+Additional Fees (Late days): $101.4
+Total Amount: $152.10000000000002
+-----------------------------------
+Invoice ID: a51054d2-0fca-4b92-a20c-505e9495656a
+Booking ID: f4a17147-fb79-456c-8af2-31dfd5b6fe80
+Customer: zezoo
+Car ID: 8df0fe8b-5f06-4ef9-aaf5-9ab45a72a56c
+Type: ElectricCar
+Rent Per Day: 100.5
+Late Return fees per day: 201.0
+Start Date: 2024-09-09 00:00:00.000
+End Date: 2024-09-10 00:00:00.000
+Return Date: 2024-09-11 00:00:00.000
+Base Cost: $100.5
+Charging Fees: $20.0
+Additional Fees (Late days): $201.0
+Total Amount: $321.5
+-----------------------------------

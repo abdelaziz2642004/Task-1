@@ -1,0 +1,21 @@
+All Bookings:
+
+Booking ID: 5f216a39-899c-48be-b44a-da92a40f552c
+Customer: zezoo
+Car ID: b451b554-050d-442f-a49d-ff57d5d885e9
+Type: EconomyCar
+Rent Per Day: 50.7
+Start Date: 2024-09-09 00:00:00.000
+End Date: 2024-09-10 00:00:00.000
+Total Cost if returned on time: $50.7
+-----------------------------------
+Booking ID: f4a17147-fb79-456c-8af2-31dfd5b6fe80
+Customer: zezoo
+Car ID: 8df0fe8b-5f06-4ef9-aaf5-9ab45a72a56c
+Type: ElectricCar
+Rent Per Day: 100.5
+Charging Fees: $20.0
+Start Date: 2024-09-09 00:00:00.000
+End Date: 2024-09-10 00:00:00.000
+Total Cost if returned on time: $120.5
+-----------------------------------
