@@ -1,0 +1,10 @@
+name: car_rental_system
+description: A Dart project for a car rental system.
+version: 1.0.0
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  uuid: ^3.0.4
+  excel: ^2.1.0
