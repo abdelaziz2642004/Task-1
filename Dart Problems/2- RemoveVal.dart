@@ -1,10 +1,10 @@
 // void removeValues(List<int> res, int val,int index,List<int> numbers) {
-//   if (index==numbers.length()) return; 
+//   if (index==numbers.length()) return;
 //   if (numbers[index] != val) {
 //     res.add(numbers[index]);
 //   }
 //   removeValues(res, val, index+1,numbers);
- 
+
 // }
 // List<int> removeValuesHelper(List<int> numbers,int val){
 //   List<int> res=[];
@@ -14,23 +14,21 @@
 
 import 'dart:io';
 
-
 void main() {
   // recursive ?
   // built in I guess
 
-    // int val = 2;
+  // int val = 2;
   // List<int> result = removeValues(numbers, val);
   // print(result); // Output:
- print("Enter the numbers separated by space:");
-  List<int> numbers = stdin.readLineSync()!
-      .split(' ') 
-      .map(int.parse) 
-      .toList();
+  print("Enter the numbers separated by space:");
+  List<int> numbers = stdin.readLineSync()!.split(' ').map(int.parse).toList();
 
   int val = 2;
+  print("Enter the val that you want to remove: ");
+  val = int.parse(stdin.readLineSync()!);
+
   numbers.removeWhere((element) => element == val);
 
   print(numbers);
-
 }
